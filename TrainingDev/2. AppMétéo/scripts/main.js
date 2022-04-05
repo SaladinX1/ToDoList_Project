@@ -1,3 +1,7 @@
+import tabJoursEnOrdre from "../scripts/Utilitaire/gestionTemps.js";
+
+console.log("DEPUIS MAIN JS : " + tabJoursEnOrdre);
+
 const CLEFAPI = '2ad94a7a38d1c09957d79b4fa9155a64';
 
 let resultatsAPI;
@@ -7,6 +11,9 @@ const temperature = document.querySelector('.temperature');
 const localisation = document.querySelector('.localisation');
 const heure = document.querySelectorAll('.heure-nom-prevision');
 const tempPourH = document.querySelectorAll('.heure-prevision-valeur');
+const joursDiv = document.querySelectorAll('.jour-prevision-nom');
+const tempJoursDiv = document.querySelectorAll('.jour-prevision-nom');
+
 
 
 if (navigator.geolocation) {
@@ -62,6 +69,11 @@ function AppelAPI(long, lat) {
             // temp pour 3h
             for (let j = 0; j < tempPourH.length; j++) {
                 tempPourH[j].innerText = `${Math.trunc(resultatsAPI.hourly[j * 3].temp)}°`;
+            }
+
+            // trois premieres lettres des jours
+            for (let k = 0; k < tabJoursEnOrdre.length; k++) {
+                joursDiv[k].innerText = tabJoursEnOrdre[k].slice(0, 3);
             }
 
 
