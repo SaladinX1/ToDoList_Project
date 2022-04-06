@@ -44,6 +44,9 @@ function btnAction(e) {
 function creerCookie(name, value, exp) {
 
     infoTxt.innerText = "";
+    affichage.childNodes.forEach(child => {
+        child.remove();
+    })
 
     // Si le Cookie a le même nom 
     let cookies = document.cookie.split(';');
@@ -81,3 +84,38 @@ function creerCookie(name, value, exp) {
 
 }
 
+
+function listeCookie() {
+
+
+        let cookies =  document.cookie.split(';');
+        if(cookies.join() === "") {
+            infoTxt.innerText = 'Pas de cookies à afficher'
+            return;
+        }
+
+        cookies.forEach(cookie => {
+            
+            cookie = cookie.trim();
+            let formatCookie = cookie.split('=');
+
+            let item = document.createElement('li');
+
+            infoTxt.innerText = 'Cliquez sur un cookie pour le supprimer.';
+            item.innerText = `Nom : ${decodeURIComponent(formatCookie[0])}, Valeur : ${decodeURIComponent(formatCookie[1])}`;
+            affichage.appendChild(item);
+
+            // Pour la suppression des Cookies
+
+            item.addEventListener('click', () => {
+
+                document.cookie = `${formatCookie[0]}=; expires=${new Date(0)}`;
+                item.innerText = `Cookie ${formatCookie[0]} supprimé`;
+                setTimeout(() => {
+                    item.remove();
+                },1000);
+            })
+
+
+        })
+}
