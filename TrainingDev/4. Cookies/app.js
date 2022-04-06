@@ -1,5 +1,5 @@
 const affichage = document.querySelector('.affichage');
-const btns = document.querySelectorAll('.button');
+const btns = document.querySelectorAll('button');
 const inputs = document.querySelectorAll('input');
 const infoTxt = document.querySelector('.info-txt');
 let dejaFait = false;
