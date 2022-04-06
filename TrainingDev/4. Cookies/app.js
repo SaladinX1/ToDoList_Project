@@ -2,6 +2,7 @@ const affichage = document.querySelector('.affichage');
 const btns = document.querySelectorAll('.button');
 const inputs = document.querySelectorAll('input');
 const infoTxt = document.querySelector('.info-txt');
+let dejaFait = false;
 
 
 const today = new Date();
@@ -28,7 +29,7 @@ function btnAction(e) {
         nvObj[attrName] = attrValeur;
     })
 
-    let description = e.target.getAttribute('dat-cookie');
+    let description = e.target.getAttribute('data-cookie');
 
     if(description === 'creer') {
         creerCookie(nvObj.cookieName, nvObj.cookieValue, nvObj.cookieExpire);
@@ -42,6 +43,34 @@ function btnAction(e) {
 
 function creerCookie(name, value, exp) {
 
+    infoTxt.innerText = "";
+
+    // Si le Cookie a le même nom 
+    let cookies = document.cookie.split(';');
+    cookies.forEach(cookie => {
+
+        cookie = cookie.trim();
+
+        let formatCookie = cookie.split('=');
+        if(formatCookie[0] === encodeURIComponent(name)) {
+            dejaFait = true;
+        }
+
+    })
+
+    if(dejaFait) {
+        infoTxt.innerText = "Un Cookie possède déjà ce nom"
+        dejaFait = false;
+        return;
+    }
+
+
+    // Si le cookie n'a pas de nom 
+    if(name.length === 0) {
+        infoTxt.innerText = `Impossible de définir un cookie sans Nom`
+        return;
+    }
+
     document.cookie = `${encodeURIComponent(name)}=${encodeURIComponent(value)};expires=${exp.toUTCString()}`;
     let info = document.createElement('li');
     info.innerText = `Cookie ${name} créer.`;
@@ -51,3 +80,4 @@ function creerCookie(name, value, exp) {
     }, 1500)
 
 }
+
