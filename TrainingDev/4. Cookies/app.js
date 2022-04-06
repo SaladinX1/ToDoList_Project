@@ -38,3 +38,16 @@ function btnAction(e) {
     }
 
 }
+
+
+function creerCookie(name, value, exp) {
+
+    document.cookie = `${encodeURIComponent(name)}=${encodeURIComponent(value)};expires=${exp.toUTCString()}`;
+    let info = document.createElement('li');
+    info.innerText = `Cookie ${name} créer.`;
+    affichage.appendChild(info);
+    setTimeout(() => {
+        info.remove
+    }, 1500)
+
+}
