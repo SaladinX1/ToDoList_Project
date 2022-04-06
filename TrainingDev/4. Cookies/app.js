@@ -44,6 +44,9 @@ function btnAction(e) {
 function creerCookie(name, value, exp) {
 
     infoTxt.innerText = "";
+    affichage.innerHTML = "";
+
+
     affichage.childNodes.forEach(child => {
         child.remove();
     })
