@@ -52,13 +52,13 @@ form button {
 
 li {
     font-size: 20px;
-    width: 100%;
+    width: 70%;
     background: #f1f1f1;
     display: flex;
     align-items: center;
     padding: 5px;
     color: #333;
-    margin: 5px 0;
+    margin: 15px auto;
 }
 
 li input {
@@ -74,6 +74,7 @@ li button {
 
 button img {
     width: 40px;
+    pointer-events: none;
 }
 
 li span {
